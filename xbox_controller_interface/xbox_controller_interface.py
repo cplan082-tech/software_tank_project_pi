@@ -1,7 +1,7 @@
 #import evdev
 from evdev import InputDevice, categorize, ecodes
 
-#creates object 'gamepad' to store the data
+#creates object 'gamepad' to store the dataa
 #you can call it whatever you like
 gamepad = InputDevice('/dev/input/event2')
 
