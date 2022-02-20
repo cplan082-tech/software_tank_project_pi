@@ -1,7 +1,8 @@
+import RPi.GPIO as gpio
 from evdev import InputDevice, categorize, ecodes
 
 gamepad = InputDevice('/dev/input/event7')
-
+# Controller info *********************************
 # button code variables
 btn_a = 304
 btn_b = 305
@@ -33,10 +34,22 @@ al_leftTrig = 10
 al_dpad_x = 16
 al_dpad_y = 17  # Axis is inverted
 
+# H-Bridge info ****************************
+# pi GPIO pin numbers are used
+en1 = 16 
+en2 = 12
+
+pwr1_1 = 1 
+pwr1_2 = 7
+pwr2_1 = 8
+pwr2_2 = 25
+
+
 
 #loop and filter by event code
 for event in gamepad.read_loop():
     
+    # Button Input Event Control (no holding)
     if event.type == ecodes.EV_KEY:
         
         if event.value == 1:
@@ -85,3 +98,7 @@ for event in gamepad.read_loop():
                 continue
 #                 print("Right Joystick")
  
+    #  Analog Input Event Control
+    if event.type == ecodes.EV_ABS:
+        if event.code == al_leftJoy_x:
+            print(event.value)
